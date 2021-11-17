@@ -1,7 +1,7 @@
 /*
  * @Author: mavon
  * @Date: 2021-11-10 23:45:03
- * @LastEditTime: 2021-11-15 16:08:06
+ * @LastEditTime: 2021-11-17 16:14:11
  * @LastEditors: mavon
  * @Description: 
  */
@@ -19,9 +19,52 @@ const routes : Array<RouteRecordRaw> = [
                 name : "Index",
                 component : () => import('@/view/home/index.vue'),
                 meta : {
-                    icon: '',
+                    icon: 'home',
                     title : '首页'
-                }
+                },
+            },
+            {
+                path : 'dashbord',
+                name : "Dashbord",
+                component : () => import('@/view/dashbord/Index.vue'),
+                meta : {
+                    icon: 'dashboard',
+                    title : '看板'
+                },
+            },
+            {
+                path : 'workbench',
+                name : "Workbench",
+                component : () => import('@/view/home/index.vue'),
+                meta : {
+                    icon: 'workbench',
+                    title : '工作台'
+                },
+            }
+        ]
+    },
+    {
+        path : '/host/',
+        redirect: '/index',
+        component : Layout,
+        children : [
+            {
+                path : 'host',
+                name : "host",
+                component : () => import('@/view/home/index.vue'),
+                meta : {
+                    icon: 'host',
+                    title : '主机'
+                },
+            },
+            {
+                path : 'ip',
+                name : "ip",
+                component : () => import('@/view/home/index.vue'),
+                meta : {
+                    icon: 'ip',
+                    title : 'IP'
+                },
             }
         ]
     }
