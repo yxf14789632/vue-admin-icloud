@@ -15,6 +15,19 @@
             <vai-nav></vai-nav>
           <div class="vai-tabs">
             <vai-nav-tabs></vai-nav-tabs>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                <i class="el-icon-menu"></i>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item>关闭其他</el-dropdown-item>
+                  <el-dropdown-item>关闭左侧</el-dropdown-item>
+                  <el-dropdown-item>关闭右侧</el-dropdown-item>
+                  <el-dropdown-item>关闭全部</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </div>
         </div>
         
@@ -70,21 +83,6 @@ store.commit('addTab', tab);
         overflow: hidden;
         background: #fff;
         box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
-
-        .el-tabs .el-tabs__item {
-          height: auto;
-          padding: 0;
-          color: #fff;
-        }
-        .el-tabs--left .el-tabs__header.is-left {
-            float: left;
-            margin-bottom: 0;
-            margin-right: 10px;
-        }
-
-        .el-tabs .el-tabs__item {
-          padding: 5px!important;
-        }
 
         .ri-home-2-line:before {
           content: "\ee19";

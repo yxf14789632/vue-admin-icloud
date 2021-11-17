@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:51:15
- * @LastEditTime: 2021-11-15 16:52:31
+ * @LastEditTime: 2021-11-17 19:50:26
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -12,11 +12,11 @@
             <div class="left-panel">
                 <el-icon style="margin-right: 20px;"><fold /></el-icon>
                 <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">
+                <el-breadcrumb-item v-for="item in tabs">
                 <el-icon :size="16" class="vai-breadcrumb-icon">
                 <home-filled />
                 </el-icon>
-                首页
+                {{ item.meta.title}}
                 </el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
@@ -50,4 +50,29 @@
         </el-row>
     </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import { ref,watch,  Ref } from 'vue';
+import {useRoute, RouteLocationMatched } from 'vue-router'
+const tabs : Ref<RouteLocationMatched[]> = ref([]);
+
+const route = useRoute();
+
+const getBredcurm = () => {
+    // 获取所有有meta和title的数据
+    let mached = route.matched.filter(item => item.meta && item.meta.title);
+
+    // 判断第一个是否是首页 如果不是，则构造一个
+    const first = mached[0];
+    if(first.path !== '/index') {
+        // 构造一个
+        mached = [{path: '/index', meta : {title: '首页'}} as any].concat(mached);
+    }
+    // 设置面包屑导航数据
+    tabs.value = mached;
+}
+
+getBredcurm();
+
+watch(()=> route.path, ()=> getBredcurm())
+</script>

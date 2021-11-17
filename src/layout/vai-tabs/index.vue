@@ -1,12 +1,12 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:43:09
- * @LastEditTime: 2021-11-15 17:11:20
+ * @LastEditTime: 2021-11-17 17:50:33
  * @LastEditors: mavon
  * @Description: 
 -->
 <template>
-    <el-tabs tab-position="left">
+    <el-tabs class="vai-left-tabs"  tab-position="left">
         <el-tab-pane label="User">
         <template #label>
             <span class="vai-column-grid">
@@ -54,10 +54,21 @@
 </script>
 
 <style lang="scss">
-.el-tabs {
-        position: fixed;
-        height: 100%;
+.vai-left-tabs {
+    position: fixed;
+    height: 100%;
 }
+
+.vai-left-tabs .el-tabs__header .el-tabs__item {
+    padding: 5px!important;
+}
+
+vai-left-tabs .el-tabs--left .el-tabs__header.is-left {
+float: left;
+margin-bottom: 0;
+margin-right: 10px;
+}
+
 .el-tabs__nav-wrap.is-left {
     background: #282c34!important;
 }
@@ -70,7 +81,7 @@
     height: 100%;
 }
 
-.el-tabs .el-tabs__header.is-left .el-tabs__nav-wrap.is-left .el-tabs__nav-scroll {
+.vai-left-tabs .el-tabs__header.is-left .el-tabs__nav-wrap.is-left .el-tabs__nav-scroll {
     height: 100%;
     overflow-y: auto;
 }
@@ -82,12 +93,15 @@
     bottom: auto;
 }
 
-.el-tabs .el-tabs__item {
+.vai-left-tabs .el-tabs__item {
     height: auto;
     padding: 0;
-    color: #fff;
+
+    span {
+        color : #FFF;
+    }
 }
-.el-tabs--left .el-tabs__header.is-left {
+.vai-left-tabs .el-tabs--left .el-tabs__header.is-left {
     float: left;
     margin-bottom: 0;
     margin-right: 10px;
@@ -112,10 +126,7 @@
 
 .el-tabs .el-tabs__item.is-active .vai-column-grid {
     background: #1890ff!important;
-}
-
-.el-tabs .el-tabs__item {
-    padding: 5px!important;
+    color: #FFF;
 }
 
 .vai-column-grid {

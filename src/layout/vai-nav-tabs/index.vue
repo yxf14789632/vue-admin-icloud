@@ -1,16 +1,16 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 17:18:41
- * @LastEditTime: 2021-11-17 16:35:58
+ * @LastEditTime: 2021-11-17 19:58:11
  * @LastEditors: mavon
  * @Description: 
 -->
 <template>
-    <el-tabs class="vai-tabs-content vai-tabs-content-smooth" v-model="activeTab" @tab-click='clickBtn' type="card" closeable @tab-remove="removeTab">
+    <el-tabs class="vai-tabs-content vai-tabs-content-smooth" v-model="activeTab" @tab-click='clickBtn' type="card" closable @tab-remove="removeTab">
         <el-tab-pane v-for="item in tabList" :key="item.path" :label="item.title" :name="item.path"></el-tab-pane>
     </el-tabs>
-
 </template>
+
 <script setup lang="ts">
 import { ref, computed ,watch, onMounted} from 'vue';
 import {useStore} from '@/store'
@@ -25,6 +25,7 @@ const tabList = computed(() => {
     return store.getters['getTabs']
 });
 
+console.log(tabList.value);
 const activeTab = ref('');
 const setActiveTab = () => {
     activeTab.value = route.path;
@@ -96,11 +97,73 @@ const clickBtn = (tab : any) => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 .vai-tabs-content-smooth {
         height: 38px;
 }
 .vai-tabs-content {
     width: calc(100% - 40px);
+}
+.vai-tabs-content-smooth .el-tabs__header {
+    border-bottom: 0!important;
+}
+
+.vai-tabs-content-smooth .el-tabs__header .el-tabs__item, .vai-tabs-content-smooth .el-tabs--card>.el-tabs__header .el-tabs__item {
+    height: 38px;
+    padding: 0 30px 0 30px!important;
+    margin-top: 5.95px;
+    margin-right: -18px;
+    line-height: 38px;
+    text-align: center;
+    border: 0!important;
+    outline: none;
+    transition: padding .3s cubic-bezier(.645,.045,.355,1)!important;
+}
+
+.vai-tabs-content-smooth .el-tabs__header .el-tabs__item.is-active:hover {
+    color: #1890ff!important;
+    background: #e8f4ff!important;
+}
+
+.vai-tabs-content-smooth .el-tabs__header .el-tabs__item.is-active, .vai-tabs-content-smooth .el-tabs__header .el-tabs__item.is-active:hover {
+    color: #1890ff;
+    background: #e8f4ff;
+}
+
+.vai-tabs-content-smooth .el-tabs__item {
+    color: #626b7d;
+}
+.vai-tabs-content-smooth .el-tabs__header .el-tabs__item.is-active, .vai-tabs-content-smooth .el-tabs__header .el-tabs__item.is-active:hover, .vai-tabs-content-smooth .el-tabs__header .el-tabs__item:hover {
+    padding: 0 30px 0 30px;
+    -webkit-mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
+    mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+.vai-tabs-content .el-tabs__header .el-tabs__nav {
+    border: 0 !important;
+}
+
+.vai-tabs-content-smooth .el-tabs__header .el-tabs__item:hover {
+    color: #515a6e;
+    background: #dee1e6;
+}
+
+.vai-tabs-content-smooth .el-tabs--card>.el-tabs__header .el-tabs__item .el-icon-close {
+    position: relative;
+    font-size: 12px;
+    width: 0;
+    height: 14px;
+    vertical-align: middle;
+    line-height: 15px;
+    overflow: hidden;
+    top: -1px;
+    right: -2px;
+    transform-origin: 100% 50%;
+}
+
+.vai-tabs-content-smooth .el-tabs--card>.el-tabs__header .el-tabs__item.is-closable:hover .el-icon-close {
+    width: 14px;
 }
 </style>
