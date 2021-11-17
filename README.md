@@ -10,3 +10,7 @@ This template should help get you started developing with Vue 3 and Typescript i
 
 Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
 # vue-admin-icloud
+
+目前效果：
+![image](https://user-images.githubusercontent.com/10344860/142238478-768374e4-19ca-464a-9b44-51855008668f.png)
+![image](https://user-images.githubusercontent.com/10344860/142238599-b877eb8a-a865-4763-8776-ac465e53d095.png)
