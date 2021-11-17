@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-16 14:10:05
- * @LastEditTime: 2021-11-17 15:58:54
+ * @LastEditTime: 2021-11-17 16:46:07
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -25,7 +25,3 @@
 // 获取父组件传值
 defineProps(['menuList']);
 </script>
-
-<style lang="scss">
-
-</style>
