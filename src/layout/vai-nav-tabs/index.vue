@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 17:18:41
- * @LastEditTime: 2021-11-17 19:58:11
+ * @LastEditTime: 2021-11-17 22:24:17
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -25,7 +25,6 @@ const tabList = computed(() => {
     return store.getters['getTabs']
 });
 
-console.log(tabList.value);
 const activeTab = ref('');
 const setActiveTab = () => {
     activeTab.value = route.path;

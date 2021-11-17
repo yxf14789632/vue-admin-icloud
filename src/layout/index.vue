@@ -5,7 +5,7 @@
         <!-- logo 标签 -->
         <vai-logo></vai-logo>
         <!-- 左侧的tab标签 -->
-        <vai-tabs></vai-tabs>
+        <vai-tabs :menuList="menuList"></vai-tabs>
         <!-- 菜单 -->
         <vai-menu></vai-menu>
       </el-scrollbar>
@@ -50,6 +50,81 @@ import VaiNavTabs from './vai-nav-tabs/index.vue'
 import { useRoute } from 'vue-router'
 import {useStore} from '@/store'
 import { IVaiTab } from '@/store/type'
+import { onMounted, reactive } from 'vue'
+
+// 动态菜单数据
+let menuList = reactive([
+    {
+        path : '/',
+        component : 'Layout',
+        meta : {
+            title : '首页',
+            sideTab: true,    // 最左侧的tab
+            icon : 'el-icon-s-home'
+        },
+        children : [
+        {
+          path : '/index',
+          component : 'Layout',
+          meta : {
+              title : '首页',
+              icon : 'el-icon-s-home'
+          },
+        },
+          {
+            path : '/dashboard',
+            component : 'Layout',
+            meta : {
+              title : '看板',
+              icon : 'el-icon-discount'
+            }
+          },
+          {
+            path : '/workbench',
+            component : 'Layout',
+            meta : {
+              title : '工作台',
+              icon : 'el-icon-s-grid'
+            }
+          }
+        ]
+    },
+    {
+        path : '/db',
+        component : 'Layout',
+        meta : {
+            title : '数据库',
+            sideTab: true,    // 最左侧的tab
+            icon : 'el-icon-s-home'
+        },
+        children : [
+        {
+          path : '/db/oracle',
+          component : 'Layout',
+          meta : {
+              title : 'Oracle',
+              icon : 'el-icon-s-home'
+          },
+        },
+        {
+            path : '/db/mysql',
+            component : 'Layout',
+            meta : {
+              title : 'Mysql',
+              icon : 'el-icon-discount'
+            }
+          },
+          {
+            path : '/db/mongodb',
+            component : 'Layout',
+            meta : {
+              title : 'MongoDB',
+              icon : 'el-icon-s-grid'
+            }
+          }
+        ]
+    }
+])
 
 const route = useRoute();
 const store = useStore();
@@ -62,6 +137,8 @@ const tab : IVaiTab = {
 };
 store.commit('addTab', tab);
 
+// 刚开始加载 设置第一个route
+store.commit('setRoutes', menuList[0].children);
 </script>
 
 <style lang="scss">

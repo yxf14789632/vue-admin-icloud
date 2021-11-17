@@ -1,7 +1,7 @@
 /*
  * @Author: mavon
  * @Date: 2021-11-10 23:45:03
- * @LastEditTime: 2021-11-17 16:14:11
+ * @LastEditTime: 2021-11-18 00:04:51
  * @LastEditors: mavon
  * @Description: 
  */
@@ -12,6 +12,7 @@ const routes : Array<RouteRecordRaw> = [
     {
         path : '/',
         redirect: '/index',
+        name : "首页",
         component : Layout,
         children : [
             {
@@ -24,9 +25,9 @@ const routes : Array<RouteRecordRaw> = [
                 },
             },
             {
-                path : 'dashbord',
-                name : "Dashbord",
-                component : () => import('@/view/dashbord/Index.vue'),
+                path : 'dashboard',
+                name : "Dashboard",
+                component : () => import('@/view/dashboard/Index.vue'),
                 meta : {
                     icon: 'dashboard',
                     title : '看板'
@@ -45,7 +46,8 @@ const routes : Array<RouteRecordRaw> = [
     },
     {
         path : '/host/',
-        redirect: '/index',
+        redirect: '/host',
+        name : "资源",
         component : Layout,
         children : [
             {
@@ -64,6 +66,41 @@ const routes : Array<RouteRecordRaw> = [
                 meta : {
                     icon: 'ip',
                     title : 'IP'
+                },
+            }
+        ]
+    },
+    {
+        path : '/db/',
+        redirect: '/oracle',
+        name : "数据库",
+        component : Layout,
+        children : [
+            {
+                path : 'oracle',
+                name : "oracle",
+                component : () => import('@/view/home/index.vue'),
+                meta : {
+                    icon: 'oracle',
+                    title : 'Oracle'
+                },
+            },
+            {
+                path : 'mysql',
+                name : "mysql",
+                component : () => import('@/view/home/index.vue'),
+                meta : {
+                    icon: 'mysql',
+                    title : 'Mysql'
+                },
+            },
+            {
+                path : 'mongodb',
+                name : "mongodb",
+                component : () => import('@/view/home/index.vue'),
+                meta : {
+                    icon: 'mongodb',
+                    title : 'MongoDB'
                 },
             }
         ]

@@ -1,56 +1,43 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:43:09
- * @LastEditTime: 2021-11-17 17:50:33
+ * @LastEditTime: 2021-11-17 23:53:17
  * @LastEditors: mavon
  * @Description: 
 -->
 <template>
-    <el-tabs class="vai-left-tabs"  tab-position="left">
-        <el-tab-pane label="User">
-        <template #label>
-            <span class="vai-column-grid">
-            <el-icon color="#FFF" :size="16" style="margin-top: 6px;" >
-                <home-filled />
-            </el-icon>
-            <span>首页</span>
-            </span>
+    <el-tabs class="vai-left-tabs"  tab-position="left" @tab-click='changeSideTab'>
+        <template v-for="menu in menuList" :key='menu.path'>
+            <el-tab-pane v-if="menu.meta.sideTab && menu.meta.sideTab" :label="menu.meta.title">
+                <template #label>
+                    <span class="vai-column-grid">
+                        <i :class="menu.meta.icon"></i>
+                        <span>{{ menu.meta.title }}</span>
+                    </span>
+                </template>
+            </el-tab-pane>
         </template>
-        </el-tab-pane>
-        <el-tab-pane label="Config">
-        <template #label>
-            <span class="vai-column-grid">
-            <el-icon color="#FFF" :size="16" style="margin-top: 6px;" >
-                <platform />
-            </el-icon>
-            <span>主机</span>
-            </span>
-        </template>
-        </el-tab-pane>
-        <el-tab-pane label="Role">
-        <template #label>
-            <span class="vai-column-grid">
-            <el-icon color="#FFF" :size="16" style="margin-top: 6px;" >
-                <list />
-            </el-icon>
-            <span>数据库</span>
-            </span>
-        </template>
-        </el-tab-pane>
-        <el-tab-pane label="Task">
-        <template #label>
-            <span class="vai-column-grid">
-            <el-icon color="#FFF" :size="16" style="margin-top: 6px;" >
-                <tickets />
-            </el-icon>
-            <span>业务</span>
-            </span>
-        </template>
-        </el-tab-pane>
     </el-tabs>
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+import {useStore} from '@/store'
+import {ref} from 'vue'
+
+const store = useStore();
+const prop = defineProps(['menuList']);
+
+const changeSideTab = (tab : any) => {
+    // 根据tab的选择来进行调整路由和选择默认路由
+    const {props} = tab;
+    const sideTabName = props.label;
+    let sideTab = prop.menuList.filter((item: { meta: { title: any; }; }) => item.meta.title === sideTabName);
+    if(sideTab && sideTab.length > 0) {
+        const routeList = sideTab[0].children;
+        store.commit('setRoutes', routeList)
+    }
+}
 </script>
 
 <style lang="scss">
@@ -139,6 +126,11 @@ margin-right: 10px;
     word-break: break-all;
     white-space: nowrap;
     line-height: 32px;
+
+    i {
+        font-size: 16px;
+        margin-top: 6px;
+    }
 }
 
 .vai-column-grid-card {
