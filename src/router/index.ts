@@ -1,7 +1,7 @@
 /*
  * @Author: mavon
  * @Date: 2021-11-10 23:45:03
- * @LastEditTime: 2021-11-18 00:04:51
+ * @LastEditTime: 2021-11-18 09:34:13
  * @LastEditors: mavon
  * @Description: 
  */
@@ -32,6 +32,17 @@ const routes : Array<RouteRecordRaw> = [
                     icon: 'dashboard',
                     title : '看板'
                 },
+                children: [
+                    {
+                        path : 'alert',
+                        name : "alert",
+                        component : () => import('@/view/home/index.vue'),
+                        meta : {
+                            icon: 'alert',
+                            title : '告警'
+                        },
+                    }
+                ]
             },
             {
                 path : 'workbench',

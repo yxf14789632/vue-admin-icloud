@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 17:18:41
- * @LastEditTime: 2021-11-17 22:24:17
+ * @LastEditTime: 2021-11-18 10:53:01
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -92,6 +92,9 @@ const clickBtn = (tab : any) => {
     const {props} = tab;
     // 跳转路由
     router.push({path : props.name})
+    // 获取路由所在的sideTab和tab 选中对应的tab
+    console.log(props);
+    console.log(router);
 }
 
 </script>

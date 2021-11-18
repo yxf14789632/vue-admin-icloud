@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:43:09
- * @LastEditTime: 2021-11-17 23:53:17
+ * @LastEditTime: 2021-11-18 09:46:47
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -24,6 +24,7 @@
 import { useRoute } from 'vue-router'
 import {useStore} from '@/store'
 import {ref} from 'vue'
+import { IVaiTab } from '@/store/type';
 
 const store = useStore();
 const prop = defineProps(['menuList']);
@@ -35,7 +36,9 @@ const changeSideTab = (tab : any) => {
     let sideTab = prop.menuList.filter((item: { meta: { title: any; }; }) => item.meta.title === sideTabName);
     if(sideTab && sideTab.length > 0) {
         const routeList = sideTab[0].children;
-        store.commit('setRoutes', routeList)
+        const activeSideTab : IVaiTab =  {title : sideTab[0].meta.title, path : sideTab[0].path};
+        store.commit('setActiveSideTab', activeSideTab);
+        store.commit('setRoutes', routeList);
     }
 }
 </script>

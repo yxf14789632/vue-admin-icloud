@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:51:15
- * @LastEditTime: 2021-11-17 19:50:26
+ * @LastEditTime: 2021-11-18 09:50:50
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -54,19 +54,23 @@
 
 import { ref,watch,  Ref } from 'vue';
 import {useRoute, RouteLocationMatched } from 'vue-router'
+import {useStore} from '@/store'
+import { IVaiTab } from '@/store/type';
+
 const tabs : Ref<RouteLocationMatched[]> = ref([]);
 
 const route = useRoute();
+const store = useStore();
 
 const getBredcurm = () => {
     // 获取所有有meta和title的数据
     let mached = route.matched.filter(item => item.meta && item.meta.title);
-
+    
     // 判断第一个是否是首页 如果不是，则构造一个
     const first = mached[0];
     if(first.path !== '/index') {
-        // 构造一个
-        mached = [{path: '/index', meta : {title: '首页'}} as any].concat(mached);
+        let sideTab : IVaiTab = store.getters['getSideTab'];
+        mached = [{path: sideTab.path , meta: {title : sideTab.title}} as any].concat(mached);
     }
     // 设置面包屑导航数据
     tabs.value = mached;

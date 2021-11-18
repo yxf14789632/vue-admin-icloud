@@ -77,7 +77,17 @@ let menuList = reactive([
             meta : {
               title : '看板',
               icon : 'el-icon-discount'
-            }
+            },
+            children : [
+              {
+                path : '/dashboard/alert',
+                component : 'Layout',
+                meta : {
+                    title : '告警',
+                    icon : 'el-icon-s-home'
+                },
+            },
+            ]
           },
           {
             path : '/workbench',
