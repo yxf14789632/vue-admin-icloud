@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 17:18:41
- * @LastEditTime: 2021-11-18 10:53:01
+ * @LastEditTime: 2021-11-19 10:28:17
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -15,7 +15,8 @@
 import { ref, computed ,watch, onMounted} from 'vue';
 import {useStore} from '@/store'
 import { useRoute, useRouter } from 'vue-router';
-import { IVaiTab } from '@/store/type';
+import { IVaiMenu, IVaiTab } from '@/store/type';
+import { log } from 'console';
 
 const route = useRoute();
 const router = useRouter();
@@ -93,8 +94,37 @@ const clickBtn = (tab : any) => {
     // 跳转路由
     router.push({path : props.name})
     // 获取路由所在的sideTab和tab 选中对应的tab
-    console.log(props);
-    console.log(router);
+    const menuList = store.getters['getMenuList'];
+    menuList.forEach((item: IVaiMenu) => {
+        if(item.children && item.children.length > 0) {
+            if(queryMenuContainsPath(item, props.name, []).length > 0) {
+                const routeList = item.children;
+                const activeSideTab : IVaiTab =  {title : item.meta.title, path : item.path};
+                store.commit('setActiveSideTab', activeSideTab);
+                store.commit('setRoutes', routeList);
+                return;
+            }
+        }
+    })
+}
+
+/**
+    递归判断目录中是否包含path
+ */
+function queryMenuContainsPath(vaiMenu : IVaiMenu, path : string, result : string[]) {
+    if(vaiMenu.children && vaiMenu.children.length > 0) {
+        let children = vaiMenu.children;
+        children.forEach((child: IVaiMenu) => {
+            if(child.path === path) {
+                result.push(child.path);
+                return false;
+            };
+            if(child.children && child.children.length > 0) {
+                return queryMenuContainsPath(child, path, result);
+            }
+        })
+    }
+    return result;
 }
 
 </script>
