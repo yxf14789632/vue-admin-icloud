@@ -149,6 +149,7 @@ store.commit('addTab', tab);
 
 // 刚开始加载 设置第一个route
 store.commit('setRoutes', menuList[0].children);
+store.commit('setUserMenuList', menuList);
 </script>
 
 <style lang="scss">

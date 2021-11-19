@@ -1,7 +1,7 @@
 /*
  * @Author: mavon
  * @Date: 2021-11-10 23:45:03
- * @LastEditTime: 2021-11-18 09:34:13
+ * @LastEditTime: 2021-11-18 19:58:45
  * @LastEditors: mavon
  * @Description: 
  */
@@ -56,7 +56,7 @@ const routes : Array<RouteRecordRaw> = [
         ]
     },
     {
-        path : '/host/',
+        path : '/resource/',
         redirect: '/host',
         name : "资源",
         component : Layout,

@@ -1,7 +1,7 @@
 /*
  * @Author: mavon
  * @Date: 2021-11-10 23:56:45
- * @LastEditTime: 2021-11-18 09:41:19
+ * @LastEditTime: 2021-11-19 09:38:31
  * @LastEditors: mavon
  * @Description:  
  */
@@ -15,7 +15,8 @@ export interface State {
   collapse : boolean,
   tabList: Array<IVaiTab>,
   routes : [],
-  activeSideTab : IVaiTab
+  activeSideTab : IVaiTab,
+  userMenuList : []
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -26,7 +27,8 @@ export const store = createStore<State>({
     collapse: false,
     tabList: [],    // 用于存储navTab
     routes : [],
-    activeSideTab : {}
+    activeSideTab : {},
+    userMenuList : []
   },
   mutations : {
     setCount(state: State, count : number) {
@@ -41,6 +43,9 @@ export const store = createStore<State>({
     addTab : (state: State, tab: IVaiTab) => {
       if(state.tabList.some(item => item.path === tab.path)) return;
       state.tabList.push(tab);
+    },
+    setUserMenuList : (state : State, menuList : []) => {
+      state.userMenuList = menuList;
     }
   },
   getters : {
@@ -55,6 +60,9 @@ export const store = createStore<State>({
     },
     getSideTab:(state : State) => {
       return state.activeSideTab;
+    },
+    getMenuList: (state : State) => {
+      return state.userMenuList;
     }
   },
 })

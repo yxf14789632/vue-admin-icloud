@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:43:09
- * @LastEditTime: 2021-11-18 09:46:47
+ * @LastEditTime: 2021-11-19 10:30:49
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -21,11 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
 import {useStore} from '@/store'
 import {ref} from 'vue'
 import { IVaiTab } from '@/store/type';
+import { useRoute, useRouter } from 'vue-router';
 
+const router = useRouter();
 const store = useStore();
 const prop = defineProps(['menuList']);
 
@@ -37,6 +38,8 @@ const changeSideTab = (tab : any) => {
     if(sideTab && sideTab.length > 0) {
         const routeList = sideTab[0].children;
         const activeSideTab : IVaiTab =  {title : sideTab[0].meta.title, path : sideTab[0].path};
+        // 默认跳转到路由的第一个
+        router.push({path : routeList[0].path})
         store.commit('setActiveSideTab', activeSideTab);
         store.commit('setRoutes', routeList);
     }
