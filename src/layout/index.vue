@@ -63,14 +63,14 @@ let menuList = reactive([
             icon : 'el-icon-s-home'
         },
         children : [
-        {
-          path : '/index',
-          component : 'Layout',
-          meta : {
-              title : '首页',
-              icon : 'el-icon-s-home'
+          {
+            path : '/index',
+            component : 'Layout',
+            meta : {
+                title : '首页',
+                icon : 'el-icon-s-home'
+            },
           },
-        },
           {
             path : '/dashboard',
             component : 'Layout',
@@ -86,8 +86,7 @@ let menuList = reactive([
                     title : '告警',
                     icon : 'el-icon-s-home'
                 },
-            },
-            ]
+            }]
           },
           {
             path : '/workbench',
@@ -100,40 +99,48 @@ let menuList = reactive([
         ]
     },
     {
-        path : '/db',
+        path : '/resource',
         component : 'Layout',
         meta : {
-            title : '数据库',
+            title : '资源',
             sideTab: true,    // 最左侧的tab
             icon : 'el-icon-s-home'
         },
         children : [
-        {
-          path : '/db/oracle',
-          component : 'Layout',
-          meta : {
-              title : 'Oracle',
-              icon : 'el-icon-s-home'
-          },
-        },
-        {
-            path : '/db/mysql',
-            component : 'Layout',
-            meta : {
-              title : 'Mysql',
-              icon : 'el-icon-discount'
-            }
-          },
           {
-            path : '/db/mongodb',
+            path : '/resource/db/oracle',
             component : 'Layout',
             meta : {
-              title : 'MongoDB',
-              icon : 'el-icon-s-grid'
-            }
-          }
-        ]
-    }
+                title : '数据库',
+                icon : 'el-icon-s-home'
+            },
+            children : [
+              {
+                path : '/resource/db/oracle',
+                component : 'Layout',
+                meta : {
+                    title : 'Oracle',
+                    icon : 'el-icon-s-home'
+                },
+              },
+              {
+                path : '/resource/db/mysql',
+                component : 'Layout',
+                meta : {
+                  title : 'Mysql',
+                  icon : 'el-icon-discount'
+                }
+              },
+              {
+                path : '/resource/db/mongodb',
+                component : 'Layout',
+                meta : {
+                  title : 'MongoDB',
+                  icon : 'el-icon-s-grid'
+                }
+              }]
+        }]
+    },
 ])
 
 const route = useRoute();

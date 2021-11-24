@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 16:43:09
- * @LastEditTime: 2021-11-19 10:30:49
+ * @LastEditTime: 2021-11-24 14:39:46
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -38,9 +38,21 @@ const changeSideTab = (tab : any) => {
     if(sideTab && sideTab.length > 0) {
         const routeList = sideTab[0].children;
         const activeSideTab : IVaiTab =  {title : sideTab[0].meta.title, path : sideTab[0].path};
+        
+        let path = "";
+        if(routeList[0].children && routeList[0].children.length > 0 ) {
+            const oneRoute = routeList[0];
+            if(oneRoute.children && oneRoute.children.length > 0) {
+                path = oneRoute.children[0].path;
+            }else {
+                path = oneRoute.path;
+            }
+        }else {
+            path = routeList[0].path;
+        }
         // 默认跳转到路由的第一个
-        router.push({path : routeList[0].path})
-        store.commit('setActiveSideTab', activeSideTab);
+        router.push({path : path});
+        store.commit('setActiveSideTab', activeSideTab); 
         store.commit('setRoutes', routeList);
     }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: mavon
  * @Date: 2021-11-10 23:45:03
- * @LastEditTime: 2021-11-18 19:58:45
+ * @LastEditTime: 2021-11-24 14:44:14
  * @LastEditors: mavon
  * @Description: 
  */
@@ -25,7 +25,7 @@ const routes : Array<RouteRecordRaw> = [
                 },
             },
             {
-                path : 'dashboard',
+                path : 'dashboard/',
                 name : "Dashboard",
                 component : () => import('@/view/dashboard/Index.vue'),
                 meta : {
@@ -69,28 +69,33 @@ const routes : Array<RouteRecordRaw> = [
                     icon: 'host',
                     title : '主机'
                 },
+                children : [
+                    {
+                        path : 'ip',
+                        name : "ip",
+                        component : () => import('@/view/home/index.vue'),
+                        meta : {
+                            icon: 'ip',
+                            title : 'IP'
+                        },
+                    }
+                ]
             },
-            {
-                path : 'ip',
-                name : "ip",
-                component : () => import('@/view/home/index.vue'),
-                meta : {
-                    icon: 'ip',
-                    title : 'IP'
-                },
-            }
         ]
     },
     {
-        path : '/db/',
-        redirect: '/oracle',
+        path : '/resource/db/',
         name : "数据库",
         component : Layout,
+        meta : {
+            icon: 'dashboard',
+            title : '数据库'
+        },
         children : [
             {
                 path : 'oracle',
                 name : "oracle",
-                component : () => import('@/view/home/index.vue'),
+                component : () => import('@/view/db/oracle/index.vue'),
                 meta : {
                     icon: 'oracle',
                     title : 'Oracle'
@@ -99,7 +104,7 @@ const routes : Array<RouteRecordRaw> = [
             {
                 path : 'mysql',
                 name : "mysql",
-                component : () => import('@/view/home/index.vue'),
+                component : () => import('@/view/db/mysql/index.vue'),
                 meta : {
                     icon: 'mysql',
                     title : 'Mysql'
@@ -108,7 +113,7 @@ const routes : Array<RouteRecordRaw> = [
             {
                 path : 'mongodb',
                 name : "mongodb",
-                component : () => import('@/view/home/index.vue'),
+                component : () => import('@/view/db/mongodb/index.vue'),
                 meta : {
                     icon: 'mongodb',
                     title : 'MongoDB'

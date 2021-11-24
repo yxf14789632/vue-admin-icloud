@@ -1,7 +1,7 @@
 <!--
  * @Author: mavon
  * @Date: 2021-11-15 17:18:41
- * @LastEditTime: 2021-11-19 10:28:17
+ * @LastEditTime: 2021-11-19 16:15:24
  * @LastEditors: mavon
  * @Description: 
 -->
@@ -87,7 +87,25 @@ onMounted(() => {
     setActiveTab();
     // 将当前路由添加到选项卡
     addTab();
+    setActiveSideTab();
 })
+
+const setActiveSideTab = () => {
+    const route = useRoute();
+    // 获取路由所在的sideTab和tab 选中对应的tab
+    const menuList = store.getters['getMenuList'];
+    menuList.forEach((item: IVaiMenu) => {
+        if(item.children && item.children.length > 0) {
+            if(queryMenuContainsPath(item, route.path, []).length > 0) {
+                const routeList = item.children;
+                const activeSideTab : IVaiTab =  {title : item.meta.title, path : item.path};
+                store.commit('setActiveSideTab', activeSideTab);
+                store.commit('setRoutes', routeList);
+                return;
+            }
+        }
+    })
+}
 
 const clickBtn = (tab : any) => {
     const {props} = tab;
